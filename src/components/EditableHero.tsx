@@ -16,7 +16,7 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
   return (
     <section 
       id={section.id}
-      className={`relative min-h-screen flex items-center justify-center overflow-hidden ${style?.padding || 'py-20'} ${style?.backgroundColor || 'bg-gray-900'}`}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background Image */}
       <div 
@@ -27,21 +27,29 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
       />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-black/40" />
+      
+      {/* Geometric Shapes */}
+      <div className="absolute left-0 bottom-0 w-40 h-40 bg-orange-200 opacity-80" />
+      <div className="absolute right-0 top-1/3 w-32 h-64 bg-teal-200 opacity-80" />
+      <div className="absolute right-0 bottom-0 w-48 h-32 bg-black opacity-80" />
+      <div className="absolute left-0 top-1/4 w-24 h-96 bg-orange-300 opacity-80" />
       
       {/* Content */}
       <div className={`relative z-10 text-center max-w-4xl mx-auto px-4 ${style?.textColor || 'text-white'}`}>
-        <h1 className={`text-5xl md:text-7xl font-bold mb-6 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
+        <h1 className={`text-5xl md:text-7xl font-bold mb-8 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
           {content.heading}
         </h1>
         
-        <p className={`text-xl md:text-2xl mb-8 opacity-90 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
-          {content.subheading}
-        </p>
+        {content.subheading && (
+          <p className={`text-xl md:text-2xl mb-8 opacity-90 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
+            {content.subheading}
+          </p>
+        )}
         
         <Button 
           size="lg" 
-          className="bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:scale-105 transition-all duration-300 px-8 py-6 text-lg"
+          className="bg-black text-white hover:bg-gray-800 transition-all duration-300 px-8 py-6 text-lg rounded-none"
         >
           {content.cta.text}
         </Button>

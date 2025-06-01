@@ -1,6 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TestimonialsSection } from '@/types/content';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface EditableTestimonialsProps {
   section: TestimonialsSection;
@@ -11,82 +12,80 @@ const EditableTestimonials: React.FC<EditableTestimonialsProps> = ({ section, on
   const { content, style } = section;
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    if (content.autoScroll) {
-      const timer = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % content.testimonials.length);
-      }, content.scrollSpeed);
-
-      return () => clearInterval(timer);
-    }
-  }, [content.autoScroll, content.scrollSpeed, content.testimonials.length]);
-
   if (!section.visible) return null;
+
+  const nextTestimonial = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % content.testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? content.testimonials.length - 1 : prevIndex - 1
+    );
+  };
+
+  const currentTestimonial = content.testimonials[currentIndex];
 
   return (
     <section 
       id={section.id}
-      className={`${style?.padding || 'py-16 lg:py-24'} ${style?.backgroundColor || 'bg-gray-50'} relative overflow-hidden`}
+      className={`${style?.padding || 'py-16'} ${style?.backgroundColor || 'bg-gray-50'} ${style?.textColor || 'text-gray-900'} relative overflow-hidden`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className={`text-center mb-16 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
-          <h2 className={`text-4xl lg:text-5xl font-bold mb-6 ${style?.textColor || 'text-gray-900'}`}>
+        <div className="text-center mb-12">
+          <p className="text-sm text-gray-600 mb-2">Testimonials</p>
+          <h2 className="text-4xl lg:text-5xl font-bold">
             {content.heading}
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          {/* Testimonial Content */}
           <div className="relative">
-            {content.testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`transition-all duration-500 ${
-                  index === currentIndex
-                    ? 'opacity-100 translate-x-0'
-                    : 'opacity-0 absolute inset-0 translate-x-8'
-                }`}
-              >
-                <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl">
-                  <div className="text-center">
-                    <div className="text-6xl text-orange-500 mb-6">"</div>
-                    <blockquote className={`text-xl lg:text-2xl leading-relaxed mb-8 italic ${style?.textColor || 'text-gray-700'}`}>
-                      {testimonial.quote}
-                    </blockquote>
-                    
-                    <div className="flex items-center justify-center space-x-4">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover border-4 border-orange-100"
-                      />
-                      <div className="text-left">
-                        <div className={`font-semibold text-lg ${style?.textColor || 'text-gray-900'}`}>
-                          {testimonial.name}
-                        </div>
-                        <div className={`${style?.textColor || 'text-gray-600'}`}>
-                          {testimonial.position}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="mb-8">
+              <blockquote className="text-lg lg:text-xl leading-relaxed text-gray-700 mb-8">
+                "{currentTestimonial.quote}"
+              </blockquote>
+              
+              <div className="mb-8">
+                <h4 className="font-semibold text-lg text-gray-900">
+                  {currentTestimonial.name}
+                </h4>
+                <p className="text-gray-600">
+                  {currentTestimonial.position}
+                </p>
               </div>
-            ))}
+            </div>
+            
+            {/* Navigation Buttons */}
+            <div className="flex gap-4">
+              <button 
+                onClick={prevTestimonial}
+                className="w-12 h-12 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button 
+                onClick={nextTestimonial}
+                className="w-12 h-12 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
-
-          {/* Indicators */}
-          <div className="flex justify-center space-x-3 mt-8">
-            {content.testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-orange-500 scale-125'
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              />
-            ))}
+          
+          {/* Customer Image */}
+          <div className="relative">
+            <img
+              src={currentTestimonial.image}
+              alt={currentTestimonial.name}
+              className="w-full h-96 object-cover"
+            />
+            {/* Geometric overlays */}
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-teal-200 opacity-80"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-16 bg-orange-300 opacity-80"></div>
           </div>
         </div>
       </div>
