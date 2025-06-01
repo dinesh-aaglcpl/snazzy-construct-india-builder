@@ -23,11 +23,17 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
     });
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     console.log('Form submitted:', formData);
@@ -39,7 +45,7 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
   return (
     <section 
       id={section.id}
-      className={`${style?.padding || 'py-16'} ${style?.backgroundColor || 'bg-blue-600'} ${style?.textColor || 'text-white'} relative overflow-hidden`}
+      className="py-20 lg:py-24 bg-blue-600 text-white relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -48,71 +54,73 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
         }} />
       </div>
       
-      <div className="relative z-10 container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative z-10 container mx-auto px-6 lg:px-8 max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           {/* Contact Information */}
-          <div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              {content.heading}
-            </h2>
-            
-            {content.subheading && (
-              <p className="text-xl mb-8 opacity-90">
-                {content.subheading}
-              </p>
-            )}
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                {content.heading}
+              </h2>
+              
+              {content.subheading && (
+                <p className="text-xl mb-12 opacity-90 leading-relaxed">
+                  {content.subheading}
+                </p>
+              )}
+            </div>
 
             {/* Contact Details */}
-            <div className="space-y-6 mb-8">
+            <div className="space-y-8">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Call Us</h4>
-                  <p className="opacity-90">{content.contactInfo.phone}</p>
+                <div className="space-y-1">
+                  <h4 className="font-semibold text-lg">Call Us</h4>
+                  <p className="opacity-90 text-lg">{content.contactInfo.phone}</p>
                   <p className="text-sm opacity-75">Mon-Fri: 8:00 AM - 6:00 PM</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Email Us</h4>
-                  <p className="opacity-90">{content.contactInfo.email}</p>
+                <div className="space-y-1">
+                  <h4 className="font-semibold text-lg">Email Us</h4>
+                  <p className="opacity-90 text-lg">{content.contactInfo.email}</p>
                   <p className="text-sm opacity-75">We respond within 24 hours</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Visit Us</h4>
-                  <p className="opacity-90">{content.contactInfo.address}</p>
+                <div className="space-y-1">
+                  <h4 className="font-semibold text-lg">Visit Us</h4>
+                  <p className="opacity-90 text-lg">{content.contactInfo.address}</p>
                   <p className="text-sm opacity-75">Schedule an appointment</p>
                 </div>
               </div>
             </div>
 
             {/* Map Placeholder */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-              <p className="text-sm opacity-75 mb-2">Location</p>
-              <p className="text-white">{content.mapPlaceholder}</p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 mt-12">
+              <p className="text-sm opacity-75 mb-3">Location</p>
+              <p className="text-white text-lg">{content.mapPlaceholder}</p>
             </div>
           </div>
 
           {/* Enhanced Contact Form */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-            <h3 className="text-2xl font-bold mb-6">Request Free Consultation</h3>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 lg:p-10 border border-white/20">
+            <h3 className="text-2xl lg:text-3xl font-bold mb-8">Request Free Consultation</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Full Name *</label>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Full Name *</label>
                   <input
                     name="name"
                     type="text"
@@ -120,11 +128,11 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
                     value={formData.name || ''}
                     onChange={handleInputChange}
                     placeholder="Your Full Name"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                    className="w-full px-4 py-4 bg-white/20 border border-white/30 rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email Address *</label>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Email Address *</label>
                   <input
                     name="email"
                     type="email"
@@ -132,52 +140,52 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
                     value={formData.email || ''}
                     onChange={handleInputChange}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                    className="w-full px-4 py-4 bg-white/20 border border-white/30 rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number</label>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Phone Number</label>
                   <input
                     name="phone"
                     type="tel"
                     value={formData.phone || ''}
                     onChange={handleInputChange}
                     placeholder="+48 123 456 789"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                    className="w-full px-4 py-4 bg-white/20 border border-white/30 rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Project Type *</label>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Project Type *</label>
                   <select
                     name="subject"
                     required
                     value={formData.subject || ''}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                    onChange={handleSelectChange}
+                    className="w-full px-4 py-4 bg-white/20 border border-white/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                   >
-                    <option value="">Select Project Type</option>
-                    <option value="residential">Residential Construction</option>
-                    <option value="commercial">Commercial Project</option>
-                    <option value="renovation">Renovation</option>
-                    <option value="infrastructure">Infrastructure</option>
-                    <option value="consulting">Consulting</option>
+                    <option value="" className="text-gray-900">Select Project Type</option>
+                    <option value="residential" className="text-gray-900">Residential Construction</option>
+                    <option value="commercial" className="text-gray-900">Commercial Project</option>
+                    <option value="renovation" className="text-gray-900">Renovation</option>
+                    <option value="infrastructure" className="text-gray-900">Infrastructure</option>
+                    <option value="consulting" className="text-gray-900">Consulting</option>
                   </select>
                 </div>
               </div>
               
-              <div>
-                <label className="block text-sm font-medium mb-2">Project Details *</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium">Project Details *</label>
                 <textarea
                   name="message"
                   required
                   value={formData.message || ''}
                   onChange={handleInputChange}
-                  rows={4}
+                  rows={5}
                   placeholder="Tell us about your project, timeline, budget range, and any specific requirements..."
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-4 bg-white/20 border border-white/30 rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all resize-none"
                 />
               </div>
               
@@ -185,12 +193,12 @@ const EditableContact: React.FC<EditableContactProps> = ({ section, onSectionUpd
                 type="submit"
                 disabled={isSubmitting}
                 size="lg" 
-                className="w-full bg-white text-blue-600 hover:bg-gray-100 transition-all duration-300 py-4 text-lg font-semibold disabled:opacity-50"
+                className="w-full bg-white text-blue-600 hover:bg-gray-100 transition-all duration-300 py-4 text-lg font-semibold rounded-xl disabled:opacity-50 mt-8"
               >
                 {isSubmitting ? 'Sending...' : content.form.submitText}
               </Button>
 
-              <p className="text-sm text-white/75 text-center">
+              <p className="text-sm text-white/75 text-center mt-4">
                 We'll respond within 24 hours with a detailed consultation.
               </p>
             </form>

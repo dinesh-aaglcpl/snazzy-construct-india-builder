@@ -29,26 +29,26 @@ const EditableTestimonials: React.FC<EditableTestimonialsProps> = ({ section, on
   return (
     <section 
       id={section.id}
-      className={`${style?.padding || 'py-16'} ${style?.backgroundColor || 'bg-gray-50'} ${style?.textColor || 'text-gray-900'} relative overflow-hidden`}
+      className="py-20 lg:py-24 bg-gray-50 text-gray-900 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-sm text-gray-600 mb-2">Testimonials</p>
-          <h2 className="text-4xl lg:text-5xl font-bold">
+      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+        <div className="text-center mb-16 lg:mb-20">
+          <p className="text-sm text-gray-600 mb-4 font-medium uppercase tracking-wider">Testimonials</p>
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             {content.heading}
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-6xl mx-auto">
           {/* Testimonial Content */}
-          <div className="relative">
-            <div className="mb-8">
-              <blockquote className="text-lg lg:text-xl leading-relaxed text-gray-700 mb-8">
+          <div className="space-y-8">
+            <div className="space-y-8">
+              <blockquote className="text-lg lg:text-xl xl:text-2xl leading-relaxed text-gray-700">
                 "{currentTestimonial.quote}"
               </blockquote>
               
-              <div className="mb-8">
-                <h4 className="font-semibold text-lg text-gray-900">
+              <div className="space-y-2">
+                <h4 className="font-semibold text-lg lg:text-xl text-gray-900">
                   {currentTestimonial.name}
                 </h4>
                 <p className="text-gray-600">
@@ -61,14 +61,14 @@ const EditableTestimonials: React.FC<EditableTestimonialsProps> = ({ section, on
             <div className="flex gap-4">
               <button 
                 onClick={prevTestimonial}
-                className="w-12 h-12 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                className="w-14 h-14 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors rounded-xl"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
               <button 
                 onClick={nextTestimonial}
-                className="w-12 h-12 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                className="w-14 h-14 bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors rounded-xl"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -78,14 +78,16 @@ const EditableTestimonials: React.FC<EditableTestimonialsProps> = ({ section, on
           
           {/* Customer Image */}
           <div className="relative">
-            <img
-              src={currentTestimonial.image}
-              alt={currentTestimonial.name}
-              className="w-full h-96 object-cover"
-            />
-            {/* Geometric overlays */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-teal-200 opacity-80"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-16 bg-orange-300 opacity-80"></div>
+            <div className="relative overflow-hidden rounded-2xl">
+              <img
+                src={currentTestimonial.image}
+                alt={currentTestimonial.name}
+                className="w-full h-96 lg:h-[500px] object-cover"
+              />
+              {/* Geometric overlays */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-teal-200 opacity-80 rounded-bl-3xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-16 bg-orange-300 opacity-80 rounded-tr-3xl"></div>
+            </div>
           </div>
         </div>
       </div>

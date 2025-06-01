@@ -40,28 +40,28 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       
       {/* Geometric Shapes */}
-      <div className="absolute left-0 bottom-0 w-40 h-40 bg-blue-500 opacity-20" />
-      <div className="absolute right-0 top-1/3 w-32 h-64 bg-blue-400 opacity-15" />
-      <div className="absolute right-0 bottom-0 w-48 h-32 bg-gray-900 opacity-60" />
-      <div className="absolute left-0 top-1/4 w-24 h-96 bg-blue-600 opacity-25" />
+      <div className="absolute left-0 bottom-0 w-40 h-40 bg-blue-500 opacity-20 rounded-tr-3xl" />
+      <div className="absolute right-0 top-1/3 w-32 h-64 bg-blue-400 opacity-15 rounded-l-3xl" />
+      <div className="absolute right-0 bottom-0 w-48 h-32 bg-gray-900 opacity-60 rounded-tl-3xl" />
+      <div className="absolute left-0 top-1/4 w-24 h-96 bg-blue-600 opacity-25 rounded-r-3xl" />
       
       {/* Content */}
-      <div className={`relative z-10 text-center max-w-5xl mx-auto px-4 ${style?.textColor || 'text-white'}`}>
-        <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
+      <div className="relative z-10 text-center max-w-6xl mx-auto px-6 lg:px-8">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white">
           {content.heading}
         </h1>
         
         {content.subheading && (
-          <p className={`text-lg md:text-xl lg:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed ${style?.alignment === 'left' ? 'text-left mx-0' : style?.alignment === 'right' ? 'text-right mx-0' : 'text-center'}`}>
+          <p className="text-lg md:text-xl lg:text-2xl mb-12 opacity-90 max-w-4xl mx-auto leading-relaxed text-white">
             {content.subheading}
           </p>
         )}
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <Button 
             size="lg" 
             onClick={handleCTAClick}
-            className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 px-10 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 rounded-xl"
           >
             {content.cta.text}
           </Button>
@@ -72,7 +72,7 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
               const element = document.querySelector('#contact');
               if (element) element.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="border-white/50 text-white hover:bg-white hover:text-gray-900 transition-all duration-300 px-8 py-6 text-lg backdrop-blur-sm"
+            className="border-white/50 text-white hover:bg-white hover:text-gray-900 transition-all duration-300 px-10 py-6 text-lg backdrop-blur-sm rounded-xl"
           >
             Get Free Quote
           </Button>
