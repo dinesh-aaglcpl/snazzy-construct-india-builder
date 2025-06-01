@@ -1,28 +1,23 @@
 
-import React from 'react';
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
-import StatsSection from '@/components/StatsSection';
-import ServicesSection from '@/components/ServicesSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
+import React, { useState } from 'react';
+import { defaultSiteConfig } from '@/data/siteConfig';
+import EditablePage from '@/components/EditablePage';
+import { SiteConfig } from '@/types/content';
 
 const Index = () => {
+  const [siteConfig, setSiteConfig] = useState<SiteConfig>(defaultSiteConfig);
+
+  const handleConfigUpdate = (newConfig: SiteConfig) => {
+    setSiteConfig(newConfig);
+    // Here you could save to localStorage, database, etc.
+    console.log('Site config updated:', newConfig);
+  };
+
   return (
-    <div className="min-h-screen">
-      <Header />
-      <HeroSection />
-      <AboutSection />
-      <StatsSection />
-      <ServicesSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <EditablePage 
+      config={siteConfig}
+      onConfigUpdate={handleConfigUpdate}
+    />
   );
 };
 
