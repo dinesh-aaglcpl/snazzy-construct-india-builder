@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,43 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Indian-inspired custom colors
+				terracotta: {
+					50: '#fef7f0',
+					100: '#fdeee0',
+					200: '#fad9bf',
+					300: '#f6c294',
+					400: '#f0a466',
+					500: '#eb8c47',
+					600: '#dc7a3c',
+					700: '#b66534',
+					800: '#915334',
+					900: '#75452d',
+				},
+				sandstone: {
+					50: '#faf9f6',
+					100: '#f4f2ed',
+					200: '#e7e3d9',
+					300: '#d8d1c1',
+					400: '#c5bba5',
+					500: '#b4a690',
+					600: '#a59583',
+					700: '#8a7e6e',
+					800: '#71685c',
+					900: '#5c544b',
+				},
+				sage: {
+					50: '#f6f7f6',
+					100: '#e3e7e3',
+					200: '#c7d0c7',
+					300: '#a4b2a4',
+					400: '#7d907d',
+					500: '#617461',
+					600: '#4c5c4c',
+					700: '#3f4b3f',
+					800: '#343d34',
+					900: '#2d332d',
 				}
 			},
 			borderRadius: {
@@ -84,11 +122,73 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in-left': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'fade-in-right': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'scale-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-20px)'
+					}
+				},
+				'parallax': {
+					'0%': {
+						transform: 'translateY(0px)'
+					},
+					'100%': {
+						transform: 'translateY(-50px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in-up': 'fade-in-up 0.6s ease-out',
+				'fade-in-left': 'fade-in-left 0.6s ease-out',
+				'fade-in-right': 'fade-in-right 0.6s ease-out',
+				'scale-in': 'scale-in 0.4s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'parallax': 'parallax 0.5s ease-out'
 			}
 		}
 	},
