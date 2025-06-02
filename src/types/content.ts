@@ -46,6 +46,33 @@ export interface HeroSection extends BaseSection {
   };
 }
 
+export interface AboutSection extends BaseSection {
+  type: 'about';
+  content: {
+    heading: string;
+    subheading: string;
+    description: string;
+    aboutUsCard: {
+      title: string;
+      content: string;
+    };
+    statistics: {
+      projects: {
+        number: string;
+        label: string;
+      };
+      clients: {
+        number: string;
+        label: string;
+      };
+      awards: {
+        number: string;
+        label: string;
+      };
+    };
+  };
+}
+
 export interface FeatureItem {
   id: string;
   icon: string;
@@ -141,6 +168,7 @@ export interface FooterSection extends BaseSection {
 export type Section = 
   | HeaderSection 
   | HeroSection 
+  | AboutSection
   | FeaturesSection 
   | TestimonialsSection 
   | RecentWorksSection 

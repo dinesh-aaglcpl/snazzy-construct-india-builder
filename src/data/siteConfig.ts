@@ -1,4 +1,3 @@
-
 import { SiteConfig } from '@/types/content';
 
 export const defaultSiteConfig: SiteConfig = {
@@ -26,10 +25,10 @@ export const defaultSiteConfig: SiteConfig = {
           text: "BlueRock Construction",
         },
         navigation: [
-          { label: "Home", href: "#home" },
+          { label: "Home", href: "#hero" },
           { label: "About", href: "#about" },
-          { label: "Services", href: "#services" },
-          { label: "Portfolio", href: "#portfolio" },
+          { label: "Services", href: "#features" },
+          { label: "Portfolio", href: "#recent-works" },
           { label: "Contact", href: "#contact" },
         ],
         cta: {
@@ -57,6 +56,40 @@ export const defaultSiteConfig: SiteConfig = {
           text: "Start Your Project",
           href: "#contact",
         },
+      },
+    },
+    {
+      id: "about",
+      type: "about",
+      name: "Section: About Us",
+      visible: true,
+      style: {
+        padding: "py-20 lg:py-32",
+        backgroundColor: "bg-gray-50",
+        alignment: "left",
+      },
+      content: {
+        heading: "Our Story, Vision, and Values",
+        subheading: "Learn about our commitment to excellence, innovation, and the principles that guide our work every day.",
+        description: "Our team of experts works tirelessly to bring your vision to life, ensuring every project we undertake not only meets but exceeds expectations. We are dedicated to transforming your ideas into impactful construction experiences that resonate with your goals and drive success.",
+        aboutUsCard: {
+          title: "ABOUT US",
+          content: "We believe in the power of collaboration and creativity. By partnering closely with our clients, we gain a deep understanding of their unique needs and goals, allowing us to deliver customized solutions that truly make a difference. Our holistic approach integrates design, technology, and strategy to create seamless and engaging construction experiences. By staying ahead of the curve and embracing the latest trends and technologies, we ensure that we provide cutting-edge solutions that not only address current challenges but also anticipate future opportunities."
+        },
+        statistics: {
+          projects: {
+            number: "200+",
+            label: "Projects Completed"
+          },
+          clients: {
+            number: "150+",
+            label: "Satisfied Clients"
+          },
+          awards: {
+            number: "50+",
+            label: "Industry Awards"
+          }
+        }
       },
     },
     {

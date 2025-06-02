@@ -3,6 +3,7 @@ import React from 'react';
 import { SiteConfig } from '@/types/content';
 import EditableHeader from './EditableHeader';
 import EditableHero from './EditableHero';
+import EditableAbout from './EditableAbout';
 import EditableFeatures from './EditableFeatures';
 import EditableTestimonials from './EditableTestimonials';
 import EditableRecentWorks from './EditableRecentWorks';
@@ -50,6 +51,14 @@ const EditablePage: React.FC<EditablePageProps> = ({ config, onConfigUpdate }) =
           case 'hero':
             return (
               <EditableHero 
+                key={section.id}
+                section={section}
+                onSectionUpdate={handleSectionUpdate}
+              />
+            );
+          case 'about':
+            return (
+              <EditableAbout 
                 key={section.id}
                 section={section}
                 onSectionUpdate={handleSectionUpdate}
