@@ -1,6 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TestimonialsSection } from '@/types/content';
+import { X } from 'lucide-react';
 
 interface EditableTestimonialsProps {
   section: TestimonialsSection;
@@ -9,86 +10,87 @@ interface EditableTestimonialsProps {
 
 const EditableTestimonials: React.FC<EditableTestimonialsProps> = ({ section, onSectionUpdate }) => {
   const { content, style } = section;
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (content.autoScroll) {
-      const timer = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % content.testimonials.length);
-      }, content.scrollSpeed);
-
-      return () => clearInterval(timer);
-    }
-  }, [content.autoScroll, content.scrollSpeed, content.testimonials.length]);
 
   if (!section.visible) return null;
 
   return (
     <section 
       id={section.id}
-      className={`${style?.padding || 'py-16 lg:py-24'} ${style?.backgroundColor || 'bg-gray-50'} relative overflow-hidden`}
+      className={`${style?.padding || 'py-16 lg:py-24'} ${style?.backgroundColor || 'bg-gradient-to-br from-orange-50 via-white to-orange-50'} relative overflow-hidden`}
     >
       <div className="container mx-auto px-4 lg:px-8">
+        {/* Header */}
         <div className={`text-center mb-16 ${style?.alignment === 'left' ? 'text-left' : style?.alignment === 'right' ? 'text-right' : 'text-center'}`}>
+          <div className="inline-flex items-center justify-center bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+            Testimonials
+          </div>
           <h2 className={`text-4xl lg:text-5xl font-bold mb-6 ${style?.textColor || 'text-gray-900'}`}>
             {content.heading}
           </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Find out how our clients are spreading the word!
+          </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {content.testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`transition-all duration-500 ${
-                  index === currentIndex
-                    ? 'opacity-100 translate-x-0'
-                    : 'opacity-0 absolute inset-0 translate-x-8'
-                }`}
-              >
-                <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl">
-                  <div className="text-center">
-                    <div className="text-6xl text-orange-500 mb-6">"</div>
-                    <blockquote className={`text-xl lg:text-2xl leading-relaxed mb-8 italic ${style?.textColor || 'text-gray-700'}`}>
-                      {testimonial.quote}
-                    </blockquote>
-                    
-                    <div className="flex items-center justify-center space-x-4">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover border-4 border-orange-100"
-                      />
-                      <div className="text-left">
-                        <div className={`font-semibold text-lg ${style?.textColor || 'text-gray-900'}`}>
-                          {testimonial.name}
-                        </div>
-                        <div className={`${style?.textColor || 'text-gray-600'}`}>
-                          {testimonial.position}
-                        </div>
-                      </div>
+        {/* Masonry Grid */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {content.testimonials.map((testimonial, index) => (
+            <div
+              key={testimonial.id}
+              className="break-inside-avoid bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              style={{
+                animationDelay: `${index * 200}ms`,
+              }}
+            >
+              {/* Header with avatar and close icon */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold text-gray-900 text-sm">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-gray-500 text-sm">
+                      @{testimonial.name.toLowerCase().replace(' ', '')}
                     </div>
                   </div>
                 </div>
+                <X className="w-4 h-4 text-gray-400" />
               </div>
-            ))}
-          </div>
 
-          {/* Indicators */}
-          <div className="flex justify-center space-x-3 mt-8">
-            {content.testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-orange-500 scale-125'
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              />
-            ))}
-          </div>
+              {/* Testimonial Content */}
+              <div className="text-gray-700 leading-relaxed mb-4">
+                {testimonial.quote}
+              </div>
+
+              {/* Position/Company */}
+              <div className="text-sm text-gray-500">
+                {testimonial.position}
+              </div>
+            </div>
+          ))}
         </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <p className="text-gray-600 mb-6">
+            Ready to join our satisfied clients?
+          </p>
+          <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            Start Your Project Today
+          </button>
+        </div>
+      </div>
+
+      {/* Background Decoration */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
+        <div className="absolute top-20 left-20 w-32 h-32 bg-orange-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-orange-300 rounded-full blur-3xl"></div>
       </div>
     </section>
   );
