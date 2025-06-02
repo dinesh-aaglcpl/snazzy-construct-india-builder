@@ -11,10 +11,17 @@ interface EditableHeaderProps {
 const EditableHeader: React.FC<EditableHeaderProps> = ({ section, onSectionUpdate }) => {
   const { content } = section;
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (!section.visible) return null;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md transition-all duration-300">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
@@ -24,23 +31,48 @@ const EditableHeader: React.FC<EditableHeaderProps> = ({ section, onSectionUpdat
                 {content.logo.text.charAt(0)}
               </span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-white drop-shadow-lg">
               {content.logo.text}
             </span>
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {content.navigation.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="relative text-gray-700 hover:text-orange-600 transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-orange-50 group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
-              </a>
-            ))}
+            <button
+              onClick={() => scrollToSection('hero')}
+              className="relative text-white/90 hover:text-white transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 group"
+            >
+              Home
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
+            </button>
+            <button
+              onClick={() => scrollToSection('features')}
+              className="relative text-white/90 hover:text-white transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 group"
+            >
+              Services
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
+            </button>
+            <button
+              onClick={() => scrollToSection('recent-works')}
+              className="relative text-white/90 hover:text-white transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 group"
+            >
+              Projects
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
+            </button>
+            <button
+              onClick={() => scrollToSection('testimonials')}
+              className="relative text-white/90 hover:text-white transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 group"
+            >
+              Testimonials
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="relative text-white/90 hover:text-white transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-white/10 group"
+            >
+              Contact
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 transform -translate-x-1/2 group-hover:w-full"></span>
+            </button>
           </nav>
 
           {/* Enhanced CTA Button */}
