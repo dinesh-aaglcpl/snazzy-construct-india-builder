@@ -1,10 +1,12 @@
-
 export interface SectionStyle {
   padding?: string;
   margin?: string;
   backgroundColor?: string;
   textColor?: string;
   alignment?: 'left' | 'center' | 'right';
+  borderRadius?: string;
+  maxWidth?: string;
+  animation?: string;
 }
 
 export interface BaseSection {
@@ -13,6 +15,7 @@ export interface BaseSection {
   name: string;
   visible: boolean;
   style?: SectionStyle;
+  editable?: boolean;
 }
 
 export interface HeaderSection extends BaseSection {
@@ -189,6 +192,10 @@ export interface SiteConfig {
       base: string;
       headings: string;
     };
+    borderRadius?: string;
+    maxWidth?: string;
   };
   sections: Section[];
+  loading?: boolean;
+  editMode?: boolean;
 }

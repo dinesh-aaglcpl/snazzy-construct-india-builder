@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SiteConfig } from '@/types/content';
 import EditableHeader from './EditableHeader';
 import EditableHero from './EditableHero';
@@ -9,6 +9,7 @@ import EditableTestimonials from './EditableTestimonials';
 import EditableRecentWorks from './EditableRecentWorks';
 import EditableContact from './EditableContact';
 import EditableFooter from './EditableFooter';
+import LoadingSkeleton from './LoadingSkeleton';
 
 interface EditablePageProps {
   config: SiteConfig;
@@ -16,6 +17,17 @@ interface EditablePageProps {
 }
 
 const EditablePage: React.FC<EditablePageProps> = ({ config, onConfigUpdate }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for better UX
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleSectionUpdate = (updatedSection: any) => {
     if (onConfigUpdate) {
       const updatedConfig = {
@@ -28,6 +40,11 @@ const EditablePage: React.FC<EditablePageProps> = ({ config, onConfigUpdate }) =
     }
   };
 
+  // Show loading skeleton if loading or config indicates loading
+  if (isLoading || config.loading) {
+    return <LoadingSkeleton />;
+  }
+
   return (
     <div 
       className="min-h-screen"
@@ -36,6 +53,8 @@ const EditablePage: React.FC<EditablePageProps> = ({ config, onConfigUpdate }) =
         fontSize: config.theme.fontSize.base,
         '--primary-color': config.theme.primaryColor,
         '--secondary-color': config.theme.secondaryColor,
+        '--border-radius': config.theme.borderRadius || '8px',
+        '--max-width': config.theme.maxWidth || '1200px',
       } as React.CSSProperties}
     >
       {config.sections.map((section) => {
