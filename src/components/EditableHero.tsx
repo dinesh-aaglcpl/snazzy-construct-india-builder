@@ -22,7 +22,6 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -31,13 +30,6 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
 
     return () => clearInterval(timer);
   }, [backgroundImages.length]);
-
-  // Parallax scrolling effect
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
@@ -53,10 +45,10 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
 
   return (
     <section 
-      id="hero"
+      id={section.id}
       className={`relative min-h-screen flex items-center justify-center overflow-hidden ${style?.padding || 'py-20'} ${style?.backgroundColor || 'bg-gray-900'}`}
     >
-      {/* Enhanced Background Image Carousel with Parallax */}
+      {/* Enhanced Background Image Carousel with Ken Burns Effect */}
       <div className="absolute inset-0">
         {backgroundImages.map((image, index) => (
           <div
@@ -66,7 +58,7 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
             }`}
             style={{
               backgroundImage: `url('${image}')`,
-              transform: `scale(${index === currentImageIndex ? 1.1 : 1}) translateY(${scrollY * 0.5}px)`,
+              transform: index === currentImageIndex ? 'scale(1.1)' : 'scale(1)',
             }}
           />
         ))}
@@ -106,11 +98,8 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
         ))}
       </div>
       
-      {/* Enhanced Content with Parallax and Better Typography */}
-      <div 
-        className={`relative z-10 text-center max-w-5xl mx-auto px-6 ${style?.textColor || 'text-white'}`}
-        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-      >
+      {/* Enhanced Content with Better Typography */}
+      <div className={`relative z-10 text-center max-w-5xl mx-auto px-6 ${style?.textColor || 'text-white'}`}>
         {/* Badge */}
         <div className="inline-flex items-center bg-orange-500/20 backdrop-blur-sm border border-orange-500/30 text-orange-200 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in-up">
           <span className="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></span>
@@ -151,11 +140,8 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
           </Button>
         </div>
 
-        {/* Trust Indicators with Parallax */}
-        <div 
-          className="mt-16 flex flex-wrap justify-center items-center gap-8 text-white/70 animate-fade-in-up" 
-          style={{ animationDelay: '900ms', transform: `translateY(${scrollY * 0.1}px)` }}
-        >
+        {/* Trust Indicators */}
+        <div className="mt-16 flex flex-wrap justify-center items-center gap-8 text-white/70 animate-fade-in-up" style={{ animationDelay: '900ms' }}>
           <div className="text-center">
             <div className="text-2xl font-bold text-white">500+</div>
             <div className="text-sm">Projects Completed</div>
@@ -181,15 +167,9 @@ const EditableHero: React.FC<EditableHeroProps> = ({ section, onSectionUpdate })
         <div className="text-white/70 text-xs mt-2 text-center">Scroll</div>
       </div>
 
-      {/* Floating Decoration Elements with Parallax */}
-      <div 
-        className="absolute top-20 right-20 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl animate-float"
-        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-      ></div>
-      <div 
-        className="absolute bottom-32 left-16 w-24 h-24 bg-orange-300/30 rounded-full blur-2xl animate-float" 
-        style={{ animationDelay: '2s', transform: `translateY(${scrollY * -0.2}px)` }}
-      ></div>
+      {/* Floating Decoration Elements */}
+      <div className="absolute top-20 right-20 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-32 left-16 w-24 h-24 bg-orange-300/30 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
     </section>
   );
 };
