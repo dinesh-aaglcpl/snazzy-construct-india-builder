@@ -42,29 +42,20 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
   return (
     <section 
       id={section.id}
-      className={`${style?.padding || 'py-16 lg:py-24'} ${style?.backgroundColor || 'bg-gray-50'} relative overflow-hidden`}
+      className={`${style?.padding || 'py-20'} ${style?.backgroundColor || 'bg-gray-50'} relative overflow-hidden`}
     >
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Header Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
                 {content.heading}
               </h2>
               <p className="text-gray-600 text-xl leading-relaxed">
                 {content.subheading}
               </p>
-            </div>
-            
-            {/* Download Button */}
-            <div className="flex justify-start">
-              <button className="w-16 h-16 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group">
-                <svg className="w-6 h-6 text-white transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </button>
             </div>
           </div>
           
@@ -74,7 +65,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
               <img 
                 src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Modern architectural spiral"
-                className="w-full h-96 lg:h-[500px] object-cover"
+                className="w-full h-96 lg:h-[480px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
@@ -82,7 +73,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
         </div>
 
         {/* Content and Card Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
           {/* Quote and Image Section */}
           <div className="space-y-8">
             <div className="relative">
@@ -107,7 +98,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
 
           {/* About Us Card */}
           <div className="relative">
-            <div className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center space-x-4">
                   <h3 className="text-white font-bold text-xl">{content.aboutUsCard.title}</h3>
@@ -117,7 +108,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
                     </svg>
                   </div>
                 </div>
-                <p className="text-white/95 leading-relaxed text-lg font-light">
+                <p className="text-white/95 leading-relaxed text-base font-light">
                   {content.aboutUsCard.content}
                 </p>
               </div>
@@ -131,10 +122,10 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
         </div>
 
         {/* Statistics Bar */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center group">
-              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-3 transition-all duration-300 group-hover:scale-110">
+              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-2 transition-all duration-300 group-hover:scale-110">
                 {content.statistics.projects.number}
               </div>
               <div className="text-gray-600 font-semibold text-lg uppercase tracking-wide">
@@ -143,7 +134,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
             </div>
             
             <div className="text-center group md:border-l md:border-r border-gray-200">
-              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-3 transition-all duration-300 group-hover:scale-110">
+              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-2 transition-all duration-300 group-hover:scale-110">
                 {content.statistics.clients.number}
               </div>
               <div className="text-gray-600 font-semibold text-lg uppercase tracking-wide">
@@ -152,7 +143,7 @@ const EditableAbout: React.FC<EditableAboutProps> = ({ section, onSectionUpdate 
             </div>
             
             <div className="text-center group">
-              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-3 transition-all duration-300 group-hover:scale-110">
+              <div className="text-5xl lg:text-6xl font-bold text-orange-600 mb-2 transition-all duration-300 group-hover:scale-110">
                 {content.statistics.awards.number}
               </div>
               <div className="text-gray-600 font-semibold text-lg uppercase tracking-wide">
